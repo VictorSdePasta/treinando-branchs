@@ -19,11 +19,7 @@
     <div id="boletim"></div>
 </body>
 <script>
-    let alunos = [];
-    let nota1 = [];
-    let nota2 = [];
-    let nota3 = [];
-    let media = [];
+     let notasAlunos = [];
     function validar() {
         let nota1 = Number(iptNota1.value);
         let nota2 = Number(iptNota2.value);
@@ -48,15 +44,19 @@
         }
     }
     function cadastrar() {
+        let nome = iptNome.value;
         let avaliacao1 = Number(iptNota1.value);
         let avaliacao2 = Number(iptNota2.value);
         let avaliacao3 = Number(iptNota3.value);
         let calculoMedia = (avaliacao1 + avaliacao2 + avaliacao3) / 3;
-        alunos.push(iptNome.value);
-        nota1.push(avaliacao1);
-        nota2.push(avaliacao2);
-        nota3.push(avaliacao3);
-        media.push(calculoMedia);
+        let avaliacaoAluno = {
+            nome: nome,
+            nota1: avaliacao1,
+            nota2: avaliacao2,
+            nota3: avaliacao3,
+            media: calculoMedia
+        }
+        notasAlunos.push(avaliacaoAluno);
         iptNome.value = '';
         iptNota1.value = '';
         iptNota2.value = '';
@@ -70,14 +70,16 @@
         }
         if (lista == 'crescente') {
             msg += `<b>Lista em ordem de cadastro</b><br>`
-            for (let i = 0; i < alunos.length; i++) {
-                msg += `<b>Aluno</b>: ${alunos[i]} - <b>N1</b>: ${nota1[i]} - <b>N2</b>: ${nota2[i]} - <b>N3</b>: ${nota3[i]} - <b>Média</b>: ${media[i].toFixed(1)} - <b>Listar em ordem crescente</b><br>`
+            for (let i = 0; i < notasAlunos.length; i++) {
+                let aluno = notasAlunos[i]
+                msg += `<b>Aluno</b>: ${aluno.nome} - <b>N1</b>: ${aluno.nota1} - <b>N2</b>: ${aluno.nota2} - <b>N3</b>: ${aluno.nota3} - <b>Média</b>: ${aluno.media.toFixed(1)} - <b>Listar em ordem crescente</b><br>`
             }
-        } 
+        }
         if (lista == 'decrescente') {
             msg += `<b>Lista em ordem inversa</b><br>`
-            for (let i = alunos.length - 1; i >= 0; i--) {
-                msg += `<b>Aluno</b>: ${alunos[i]} - <b>N1</b>: ${nota1[i]} - <b>N2</b>: ${nota2[i]} - <b>N3</b>: ${nota3[i]} - <b>Média</b>: ${media[i].toFixed(1)} - <b>Listar em ordem decrescente</b><br>`
+            for (let i = notasAlunos.length - 1; i >= 0; i--) {
+                let aluno = notasAlunos[i]
+                msg += `<b>Aluno</b>: ${aluno.nome} - <b>N1</b>: ${aluno.nota1} - <b>N2</b>: ${aluno.nota2} - <b>N3</b>: ${aluno.nota3} - <b>Média</b>: ${aluno.media.toFixed(1)} - <b>Listar em ordem crescente</b><br>`
             }
         }
         boletim.innerHTML = msg;
