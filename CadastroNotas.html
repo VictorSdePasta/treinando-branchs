@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastrar notas</title>
+</head>
+<body>
+    <h2>Cadastro de notas da Prof. Alice</h2>
+    <p>Informe o nome do aluno</p>
+    <input type="text" id="iptNome">
+    <p>Informe a primeira nota</p>
+    <input type="number" id="iptNota1">
+    <p>Informe a segunda nota</p>
+    <input type="number" id="iptNota2">
+    <p>Informe a terceira nota</p>
+    <input type="number" id="iptNota3"><br><br>
+    <button onclick="validar()">Cadastro</button>   <button onclick="listar()">Listar</button>   <button onclick="selecionar()">Aluno</button>   <button onclick="calcular()">Média</button>   <button onclick="buscar()">Notas maior que</button><br><br>
+    <div id="boletim"></div>
+</body>
+<script>
+    let alunos = [];
+    let nota1 = [];
+    let nota2 = [];
+    let nota3 = [];
+    let media = [];
+    function validar() {
+        let nota1 = Number(iptNota1.value);
+        let nota2 = Number(iptNota2.value);
+        let nota3 = Number(iptNota3.value);
+        let msg = '';
+        if (iptNome.value == '' || (iptNome.value).length < 9) {
+            msg += 'O nome precisa ter no mínimo 9 caracteres<br>';
+        }
+        if (nota1 < 0 || iptNota1.value == '' || nota1 > 10) {
+            msg += 'A primeira nota deve ser um número maior ou igual a 0 e menor ou igua a 10<br>';
+        }
+        if (nota2 < 0 || iptNota2.value == '' || nota2 > 10) {
+            msg += 'A segunda nota deve ser um número maior ou igual a 0 e menor ou igua a 10<br>';
+        }
+        if (nota3 < 0 || iptNota3.value == '' || nota3 > 10) {
+            msg += 'A terceira nota deve ser um número maior ou igual a 0 e menor ou igua a 10<br>';
+        }
+        if (msg == '') {
+            cadastrar();
+        } else {
+            boletim.innerHTML = msg;
+        }
+    }
+    function cadastrar() {
+        let avaliacao1 = Number(iptNota1.value);
+        let avaliacao2 = Number(iptNota2.value);
+        let avaliacao3 = Number(iptNota3.value);
+        let calculoMedia = (avaliacao1 + avaliacao2 + avaliacao3) / 3;
+        alunos.push(iptNome.value);
+        nota1.push(avaliacao1);
+        nota2.push(avaliacao2);
+        nota3.push(avaliacao3);
+        media.push(calculoMedia);
+        iptNome.value = '';
+        iptNota1.value = '';
+        iptNota2.value = '';
+        iptNota3.value = '';
+    }
+    function listar() {
+        let msg = '';
+        let lista = prompt('Por onde deseja começar? Do primeiro até o ultimo cadastrado digite crescente. Do último até o primeiro digite decrescente.');
+        while (lista.toLowerCase() != 'crescente' && lista.toLowerCase() != 'decrescente') {
+            lista = prompt('Por onde deseja começar? Do primeiro até o ultimo cadastrado digite crescente. Do último até o primeiro digite decrescente.');
+        }
+        if (lista == 'crescente') {
+            msg += `<b>Lista em ordem de cadastro</b><br>`
+            for (let i = 0; i < alunos.length; i++) {
+                msg += `<b>Aluno</b>: ${alunos[i]} - <b>N1</b>: ${nota1[i]} - <b>N2</b>: ${nota2[i]} - <b>N3</b>: ${nota3[i]} - <b>Média</b>: ${media[i].toFixed(1)} - <b>Listar em ordem crescente</b><br>`
+            }
+        } 
+        if (lista == 'decrescente') {
+            msg += `<b>Lista em ordem inversa</b><br>`
+            for (let i = alunos.length - 1; i >= 0; i--) {
+                msg += `<b>Aluno</b>: ${alunos[i]} - <b>N1</b>: ${nota1[i]} - <b>N2</b>: ${nota2[i]} - <b>N3</b>: ${nota3[i]} - <b>Média</b>: ${media[i].toFixed(1)} - <b>Listar em ordem decrescente</b><br>`
+            }
+        }
+        boletim.innerHTML = msg;
+    }
+    function selecionar() {
+        let buscar = prompt('Digite o nome do aluno para saber suas notas');
+        let msg = '';
+        while (alunos.indexOf(buscar) == -1) {
+            buscar = prompt('Aluno não encontrado, corrija o nome do aluno');
+        }
+        
+        msg += `<b>Aluno</b>: ${alunos[i]} - <b>N1</b>: ${nota1[i]} - <b>N2</b>: ${nota2[i]} - <b>N3</b>: ${nota3[i]} - <b>Média</b>: ${media[i].toFixed(1)} - <b>Listar em ordem decrescente</b><br>`
+    }
+    function calcular() {
+        
+    }
+    function calcular() {
+        
+    }
+    function buscar() {
+        
+    }
+</script>
+</html>
