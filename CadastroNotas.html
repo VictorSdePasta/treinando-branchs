@@ -109,11 +109,40 @@
         boletim.innerHTML = msg;
     }
     function calcular() {
-        
+        let buscar = prompt('Você deseja buscar o aluno com a maior ou menor média? Digite maior ou menor');
+        let msg = '';
+        let maiorMedia = notasAlunos[0].media;
+        let menorMedia = notasAlunos[0].media;
+        boletim.innerHTML = '';
+        while (buscar.toLowerCase() != 'maior' && buscar.toLowerCase() != 'menor') {
+            buscar = prompt('Digite maior ou menor para selecionar');
+        }
+        if (buscar == 'maior') {
+            for (let i = 0; i < notasAlunos.length; i++) {
+                let maiorAluno = '';
+                if (notasAlunos[i].media >= maiorMedia) {
+                    boletim.innerHTML = '';
+                    maiorMedia = notasAlunos[i].media;
+                    maiorAluno = notasAlunos[i];
+                    msg = `<b>Maior média</b><br><b>Aluno</b>: ${maiorAluno.nome} - <b>N1</b>: ${maiorAluno.nota1} - <b>N2</b>: ${maiorAluno.nota2} - <b>N3</b>: ${maiorAluno.nota3} - <b>Média</b>: ${maiorAluno.media.toFixed(1)}`
+                    boletim.innerHTML = msg;
+                }
+                
+            }
+        } else {
+            for (let i = 0; i < notasAlunos.length; i++) {
+                let menorAluno = '';
+                if (notasAlunos[i].media <= menorMedia) {
+                    boletim.innerHTML = '';
+                    menorMedia = notasAlunos[i].media
+                    menorAluno = notasAlunos[i];
+                    msg = `<b>Menor média</b><br><b>Aluno</b>: ${menorAluno.nome} - <b>N1</b>: ${menorAluno.nota1} - <b>N2</b>: ${menorAluno.nota2} - <b>N3</b>: ${menorAluno.nota3} - <b>Média</b>: ${menorAluno.media.toFixed(1)}`
+                    boletim.innerHTML = msg;
+                }   
+            }
+        }
     }
-    function calcular() {
-        
-    }
+
     function buscar() {
         
     }
