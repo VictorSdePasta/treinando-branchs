@@ -87,11 +87,26 @@
     function selecionar() {
         let buscar = prompt('Digite o nome do aluno para saber suas notas');
         let msg = '';
-        while (alunos.indexOf(buscar) == -1) {
-            buscar = prompt('Aluno não encontrado, corrija o nome do aluno');
+        let contem = '';
+        for (var i = 0; i < notasAlunos.length; i++) {
+            if (buscar == notasAlunos[i].nome) {
+                contem = notasAlunos[i].nome;
+                break;
+            }
         }
-        
-        msg += `<b>Aluno</b>: ${alunos[i]} - <b>N1</b>: ${nota1[i]} - <b>N2</b>: ${nota2[i]} - <b>N3</b>: ${nota3[i]} - <b>Média</b>: ${media[i].toFixed(1)} - <b>Listar em ordem decrescente</b><br>`
+        boletim.innerHTML = '';
+        while (contem == '') {
+            buscar = prompt('Aluno não encontrado, corrija o nome do aluno');
+            for (var i = 0; i < notasAlunos.length; i++) {
+                if (buscar == notasAlunos[i].nome) {
+                    contem = notasAlunos[i].nome;
+                    break;
+                }
+            }
+        }
+        let aluno = notasAlunos[i]
+        msg += `<b>Aluno</b>: ${aluno.nome} - <b>N1</b>: ${aluno.nota1} - <b>N2</b>: ${aluno.nota2} - <b>N3</b>: ${aluno.nota3} - <b>Média</b>: ${aluno.media.toFixed(1)}`
+        boletim.innerHTML = msg;
     }
     function calcular() {
         
