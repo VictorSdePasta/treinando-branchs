@@ -144,7 +144,19 @@
     }
 
     function buscar() {
-        
+        let popup = prompt("Qual a nota limite? (Entre 0 a 10)")
+
+        while (popup < 0 || popup > 10) {
+            popup = prompt("Qual a nota limite? (Entre 0 a 10)")          
+        }
+        let msg = ''
+        for (let i = 0; i < notasAlunos.length; i++) {
+            let aluno = notasAlunos[i]
+            if (aluno.nota1 > popup || aluno.nota2 > popup || aluno.nota3 > popup) {
+                msg += `<br><b>Aluno</b>: ${aluno.nome} - <b>N1</b>: ${aluno.nota1} - <b>N2</b>: ${aluno.nota2} - <b>N3</b>: ${aluno.nota3} - <b>Média</b>: ${aluno.media.toFixed(1)} - <b>Nota maior que: ${popup}</b>`
+            }
+        }
+        boletim.innerHTML = msg;
     }
 </script>
 </html>
